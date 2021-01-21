@@ -1,0 +1,19 @@
+// NAVBAR
+nav {
+    #dropdownMenuLink {
+        min-width: 10rem;
+    }
+    @media (max-width: 375px) {
+        .navbar-header,
+        .dropdown,
+        .user,
+        form {
+            display: block;
+            margin: auto;
+        }
+    }
+}
+
+hr {
+    height: 5px;
+}

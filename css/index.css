@@ -1,0 +1,18 @@
+nav #dropdownMenuLink {
+  min-width: 10rem;
+}
+
+@media (max-width: 375px) {
+  nav .navbar-header,
+  nav .dropdown,
+  nav .user,
+  nav form {
+    display: block;
+    margin: auto;
+  }
+}
+
+hr {
+  height: 5px;
+}
+/*# sourceMappingURL=index.css.map */
