@@ -7,9 +7,6 @@ function getAnime(anime) {
                 chapters.push(`https://onepiecemovil.com/ver/${i}/`);
             }
             break;
-        case "Haikyuu":
-            for (let i = 1; i < )
-            break;
         case "CodeGeass":
             let chaps = [
                 "9LpxVKxC#NaBAaXwDxAE7RM3-_zmROn_Dqog9FsJrfVKhabzuKyA",
