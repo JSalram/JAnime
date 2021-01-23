@@ -1,6 +1,10 @@
 <?php
-if (!isset($_POST["logout"])) {
-    session_start();
+session_start();
+
+if (isset($_POST["logout"])) {
+    unset($_SESSION["user"]);
+    unset($_SESSION["password"]);
+    echo '<script>localStorage.clear()</script>';
 }
 ?>
 
@@ -52,8 +56,8 @@ if (!isset($_POST["logout"])) {
                     $password = $_POST["password"];
                 }
 
-                // $conn = new mysqli("localhost", "root", "", "series");
-                $conn = new mysqli("sql207.epizy.com", "epiz_27293444", "GTAZ4ep1Zy", "epiz_27293444_janime");
+                $conn = new mysqli("localhost", "root", "", "series");
+                // $conn = new mysqli("sql207.epizy.com", "epiz_27293444", "GTAZ4ep1Zy", "epiz_27293444_janime");
 
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
