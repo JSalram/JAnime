@@ -30,7 +30,6 @@ function printChapters() {
         let h3 = document.createElement("h3");
         if (seasons.includes(i - 1)) {
             h3.innerHTML = `<h3 class='mt-2'>Temporada ${++temp}<h3></h3>`;
-            console.log(temp);
             ul.appendChild(h3);
         }
 
