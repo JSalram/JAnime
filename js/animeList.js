@@ -1,10 +1,25 @@
 function getAnime(anime) {
-    let chapters = [];
+    let serie = {
+        chapters: [],
+        seasons: [0],
+    };
 
     switch (anime) {
         case "OnePiece":
             for (let i = 1; i <= 950; i++) {
-                chapters.push(`https://onepiecemovil.com/ver/${i}/`);
+                serie.chapters.push(`https://onepiecemovil.com/ver/${i}/`);
+            }
+            break;
+        case "Haikyuu":
+            let temp = 1;
+            serie.seasons.push(25, 50, 60);
+
+            for (let i = 1; i < 86; i++) {
+                serie.chapters.push(`https://haikyuu.top/temporada-${temp}/episodio-${i - serie.seasons[temp - 1]}/`);
+
+                if (serie.seasons.includes(i)) {
+                    temp++;
+                }
             }
             break;
         case "CodeGeass":
@@ -36,11 +51,11 @@ function getAnime(anime) {
                 "lXxAFRLI#bJ3-uH-8kQRKFrAWH4zftgHLbdFWZ6SCeQZB0WajPYw",
             ];
             chaps.forEach((url) => {
-                chapters.push(`https://mega.nz/embed/${url}/`)
+                serie.chapters.push(`https://mega.nz/embed/${url}/`);
             });
             break;
     }
-    return chapters;
+    return serie;
 }
 
 export { getAnime };

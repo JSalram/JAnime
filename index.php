@@ -56,8 +56,8 @@ if (isset($_POST["logout"])) {
                     $password = $_POST["password"];
                 }
 
-                $conn = new mysqli("localhost", "root", "", "series");
-                // $conn = new mysqli("sql207.epizy.com", "epiz_27293444", "GTAZ4ep1Zy", "epiz_27293444_janime");
+                // $conn = new mysqli("localhost", "root", "", "series");
+                $conn = new mysqli("sql207.epizy.com", "epiz_27293444", "GTAZ4ep1Zy", "epiz_27293444_janime");
 
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);

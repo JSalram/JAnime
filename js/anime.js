@@ -6,8 +6,9 @@ let path = window.location.pathname;
 let page = path.split("/");
 let anime = page[page.length - 2];
 
-// Get Anime array
-const chapters = getAnime(anime);
+// Get Anime arrays
+const chapters = getAnime(anime).chapters;
+const seasons = getAnime(anime).seasons;
 
 // Prepare vars
 let user = localStorage.getItem("user");
@@ -16,6 +17,7 @@ let w = localStorage.getItem(`w${anime}`);
 let last = document.querySelector("a.last");
 
 function printChapters() {
+    let temp = 0;
     ul.innerHTML = "";
 
     for (let i = 1; i <= chapters.length; i++) {
@@ -24,12 +26,20 @@ function printChapters() {
         let a = document.createElement("a");
         let div = document.createElement("div");
 
+        // Print seasons
+        let h3 = document.createElement("h3");
+        if (seasons.includes(i - 1)) {
+            h3.innerHTML = `<h3 class='mt-2'>Temporada ${++temp}<h3></h3>`;
+            console.log(temp);
+            ul.appendChild(h3);
+        }
+
         // Print chapter
         li.classList.add("list-group-item");
         row.classList.add("row");
-        a.href = chapters[i-1];
+        a.href = chapters[i - 1];
         a.target = "_blank";
-        a.textContent = `Capítulo ${i}`;
+        a.textContent = `Capítulo ${i - seasons[temp - 1]}`;
         a.classList.add("btn", "btn-link", "d-block", "text-left", "col-md-11", "col-10");
 
         // Check watched chapters
