@@ -12,10 +12,17 @@ function getAnime(anime) {
             break;
         case "Haikyuu":
             let temp = 1;
-            serie.seasons.push(25, 50, 60);
+            serie.seasons.push(26, 51, 61);
 
-            for (let i = 1; i < 86; i++) {
-                serie.chapters.push(`https://haikyuu.top/temporada-${temp}/episodio-${i - serie.seasons[temp - 1]}/`);
+            // serie.seasons.push(25, 50, 60);
+            // for (let i = 1; i < 86; i++) {
+                
+            for (let i = 1; i < 87; i++) {
+                if (i <= 26) {
+                    serie.chapters.push(`https://www3.animeflv.net/ver/haikyuu-${i}`);
+                } else {
+                    serie.chapters.push(`https://haikyuu.top/temporada-${temp}/episodio-${i - serie.seasons[temp - 1]}/`);
+                }
 
                 if (serie.seasons.includes(i)) {
                     temp++;
