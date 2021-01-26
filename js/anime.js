@@ -14,6 +14,9 @@ const embed = getAnime(anime).embed;
 // Prepare vars
 let user = localStorage.getItem("user");
 let ul = document.querySelector("ul");
+let modal = document.querySelector("#modal .modal-body");
+let modalTitle = document.querySelector("#modal .modal-title");
+let closeModal = document.querySelector("#modal button");
 let w = localStorage.getItem(`w${anime}`);
 let last = document.querySelector("a.last");
 
@@ -24,8 +27,8 @@ function print() {
     for (let i = 1; i <= chapters.length; i++) {
         let li = document.createElement("li");
         let row = document.createElement("div");
-        let a = document.createElement("a");
-        let div = document.createElement("div");
+        let b = document.createElement("button");
+        let eye = document.createElement("div");
 
         // Print seasons
         let h3 = document.createElement("h3");
@@ -37,44 +40,60 @@ function print() {
         // Print chapter
         li.classList.add("list-group-item");
         row.classList.add("row");
-        a.textContent = `Capítulo ${i - seasons[temp - 1]}`;
-        a.classList.add("btn", "btn-link", "d-block", "text-left", "col-md-11", "col-10");
+        b.textContent = `Capítulo ${i - seasons[temp - 1]}`;
+        b.classList.add("btn", "btn-link", "d-block", "text-left", "col-md-11", "col-10");
+        b.setAttribute("data-bs-toggle", "modal");
+        b.setAttribute("data-bs-target", `#modal`);
 
         // Scraping(!) chapter
-        if (embed) {
-            a.href = chapters[i - 1];
-            a.target = "_blank";
-        } else {
-            a.addEventListener("click", () => {
-                watch(chapters[i - 1]);
-            });
-        }
+        b.addEventListener("click", () => {
+            watch(chapters[i - 1]);
+            modalTitle.innerHTML = `Capítulo ${i}`;
+        });
 
         // Check watched chapters
-        setWatched(i, li, a, div);
-        div.addEventListener("click", function () {
-            toggleWatch(i, div);
+        setWatched(i, li, b, eye);
+        eye.addEventListener("click", function () {
+            toggleWatch(i, eye);
             sendWatched();
         });
 
         // Append childs
-        row.appendChild(a);
-        row.appendChild(div);
+        row.appendChild(b);
+        row.appendChild(eye);
         li.appendChild(row);
         ul.appendChild(li);
     }
 }
 
 function watch(url) {
-    let html = new XMLHttpRequest();
-    html.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            window.open(this.responseText, "_blank");
-        }
-    };
-    html.open("GET", `../php/scraping.php?url=${url}`, true);
-    html.send();
+    if (!embed) {
+        let html = new XMLHttpRequest();
+        html.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                modal.innerHTML = `<iframe 
+                width="100%" 
+                height="315" 
+                src=${this.responseText} 
+                frameborder="0" 
+                allowfullscreen
+                ></iframe>`;
+            }
+        };
+        html.open("GET", `../php/scraping.php?url=${url}&embed=1`, true);
+        html.send();
+    } else {
+        modal.innerHTML = `<iframe 
+        width="100%" 
+        height="315" 
+        src=${url} 
+        frameborder="0" 
+        allowfullscreen
+        ></iframe>`;
+    }
 }
+
+// ====================================================== //
 
 function toggleWatch(i, element) {
     if (element.classList.contains("watch")) {
@@ -111,6 +130,9 @@ function sendWatched() {
     xhttp.send();
 }
 
+closeModal.addEventListener("click", () => {
+    modal.innerHTML = "";
+});
 print();
 
 // ====================================================== //
