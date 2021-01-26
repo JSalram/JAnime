@@ -2,12 +2,13 @@ function getAnime(anime) {
     let serie = {
         chapters: [],
         seasons: [0],
+        embed: false
     };
 
     switch (anime) {
         case "OnePiece":
             for (let i = 1; i <= 950; i++) {
-                serie.chapters.push(`https://onepiecemovil.com/ver/${i}/`);
+                serie.chapters.push(`https://www3.animeflv.net/ver/one-piece-tv-${i}`);
             }
             break;
         case "Haikyuu":
@@ -30,6 +31,7 @@ function getAnime(anime) {
             }
             break;
         case "CodeGeass":
+            serie.embed = true;
             let chaps = [
                 "9LpxVKxC#NaBAaXwDxAE7RM3-_zmROn_Dqog9FsJrfVKhabzuKyA",
                 "hThTgazT#GyfjNUsP5s3jWjbojEwVx04pk91_SazH9LlBHaWJVwI",

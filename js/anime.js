@@ -9,6 +9,7 @@ let anime = page[page.length - 2];
 // Get Anime arrays
 const chapters = getAnime(anime).chapters;
 const seasons = getAnime(anime).seasons;
+const embed = getAnime(anime).embed;
 
 // Prepare vars
 let user = localStorage.getItem("user");
@@ -16,7 +17,7 @@ let ul = document.querySelector("ul");
 let w = localStorage.getItem(`w${anime}`);
 let last = document.querySelector("a.last");
 
-function printChapters() {
+function print() {
     let temp = 0;
     ul.innerHTML = "";
 
@@ -36,16 +37,24 @@ function printChapters() {
         // Print chapter
         li.classList.add("list-group-item");
         row.classList.add("row");
-        a.href = chapters[i - 1];
-        a.target = "_blank";
         a.textContent = `Capítulo ${i - seasons[temp - 1]}`;
         a.classList.add("btn", "btn-link", "d-block", "text-left", "col-md-11", "col-10");
 
+        // Scraping(!) chapter
+        if (embed) {
+            a.href = chapters[i - 1];
+            a.target = "_blank";
+        } else {
+            a.addEventListener("click", () => {
+                watch(chapters[i - 1]);
+            });
+        }
+
         // Check watched chapters
-        watchedChap(i, li, a, div);
+        setWatched(i, li, a, div);
         div.addEventListener("click", function () {
             toggleWatch(i, div);
-            setWatched();
+            sendWatched();
         });
 
         // Append childs
@@ -54,6 +63,17 @@ function printChapters() {
         li.appendChild(row);
         ul.appendChild(li);
     }
+}
+
+function watch(url) {
+    let html = new XMLHttpRequest();
+    html.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            window.open(this.responseText, "_blank");
+        }
+    };
+    html.open("GET", `../php/scraping.php?url=${url}`, true);
+    html.send();
 }
 
 function toggleWatch(i, element) {
@@ -67,9 +87,9 @@ function toggleWatch(i, element) {
 
     localStorage.setItem(`w${anime}`, w);
 
-    printChapters();
+    print();
 }
-function watchedChap(i, li, a, div) {
+function setWatched(i, li, a, div) {
     if (i <= w) {
         li.classList.add("bg-success");
         a.classList.add("text-light");
@@ -85,13 +105,13 @@ function watchedChap(i, li, a, div) {
         div.classList.add("watch");
     }
 }
-function setWatched() {
+function sendWatched() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", `../php/watched.php?anime=${anime}&user=${user}&w=${w}`, true);
     xhttp.send();
 }
 
-printChapters();
+print();
 
 // ====================================================== //
 
