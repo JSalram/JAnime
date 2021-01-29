@@ -5,8 +5,8 @@ favoritas de la manera más cómoda posible, escogiendo además la fuente de los
 mejor calidad posible.
 
 Empezó siendo un proyecto sencillo con tan solo Bootstrap y JavaScript, pero he ido mejorándolo cada vez más,
-por lo que ya tiene conexión a base de datos y web scraping de los capítulos mediante PHP (AJAX) y también JS 
-modular para añadir más fácilmente las nuevas series.
+por lo que ya tiene conexión a base de datos y web scraping de los capítulos (PHP y AJAX), uso de Sass para
+los estilos y también JS modular para añadir más fácilmente las nuevas series.
 
 Actualmente se encuentra subido a un hosting gratuito donde poder compartirlo con amigos y así sacar provecho de
 lo que tengo hecho por ahora.
