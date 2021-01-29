@@ -2,7 +2,7 @@
 
 <?php
 if (isset($_POST["logout"])) {
-    unset($_COOKIE["user"]);    
+    unset($_COOKIE["user"]);
     setcookie("user", "", time() - 3600);
     echo '<script>localStorage.clear()</script>';
 }
@@ -29,7 +29,37 @@ if (isset($_POST["logout"])) {
             <div class="navbar-header">
                 <h1 class="text-light">JAnime</h1>
             </div>
-            <?php if (!isset($_COOKIE["user"]) && (!isset($_POST["user"]) && !isset($_POST["password"]))) : ?>
+
+            <!-- COOKIE IS SET -->
+            <?php if (isset($_COOKIE["user"])) : ?>
+
+                <?php
+                $user = $_COOKIE["user"];
+
+                $conn = new mysqli("localhost", "root", "", "series");
+
+                echo '<div class="user card p-2">' . ucfirst($user) . '</div>';
+                echo '<form action="index.php" method="POST">
+                        <input type="hidden" name="logout">
+                        <button class="btn btn-danger"
+                        type="submit" >Cerrar sesión</button>
+                    </form>';
+
+
+                $sql = "SELECT name_Serie, watched FROM users_watch_series WHERE username_User='$user'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="watched" style="display: none">w' . $row["name_Serie"] . ':' . $row["watched"] . '</div>';
+                    }
+                }
+                $conn->close();
+                ?>
+
+                <!-- POST IS NOT SET -->
+            <?php elseif (!isset($_POST["user"]) && !isset($_POST["password"])) : ?>
+
                 <div class="dropdown">
                     <a class="btn btn-dark border-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Regístrate
@@ -48,15 +78,13 @@ if (isset($_POST["logout"])) {
                         </form>
                     </div>
                 </div>
+
+                <!-- POST IS SET -->
             <?php else : ?>
+
                 <?php
-                if (!isset($_POST["user"]) && !isset($_POST["password"])) {
-                    $user = $_COOKIE["user"];
-                    $password = $_COOKIE["password"];
-                } else {
-                    $user = $_POST["user"];
-                    $password = $_POST["password"];
-                }
+                $user = $_POST["user"];
+                $password = $_POST["password"];
 
                 $conn = new mysqli("localhost", "root", "", "series");
 
@@ -68,26 +96,7 @@ if (isset($_POST["logout"])) {
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    echo '<div class="user card p-2">' . ucfirst($user) . '</div>';
-                    echo '<form action="index.php" method="POST">
-                        <input type="hidden" name="logout">
-                        <button class="btn btn-danger"
-                        type="submit" >Cerrar sesión</button>
-                    </form>';
-
-
-                    $sql = "SELECT name_Serie, watched FROM users_watch_series WHERE username_User='$user'";
-                    $result = $conn->query($sql);
-
                     setcookie("user", $user);
-                    setcookie("password", $password);
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<div class="watched" style="display: none">w' . $row["name_Serie"] . ':' . $row["watched"] . '</div>';
-                        }
-                    }
-                } else {
                     header('Location: ' . $_SERVER['REQUEST_URI']);
                 }
                 $conn->close();
