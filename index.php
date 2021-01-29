@@ -1,14 +1,13 @@
-<?php
-session_start();
+<!DOCTYPE html>
 
+<?php
 if (isset($_POST["logout"])) {
-    unset($_SESSION["user"]);
-    unset($_SESSION["password"]);
+    unset($_COOKIE["user"]);    
+    setcookie("user", "", time() - 3600);
     echo '<script>localStorage.clear()</script>';
 }
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,7 +29,7 @@ if (isset($_POST["logout"])) {
             <div class="navbar-header">
                 <h1 class="text-light">JAnime</h1>
             </div>
-            <?php if (!isset($_SESSION["user"]) && (!isset($_POST["user"]) && !isset($_POST["password"]))) : ?>
+            <?php if (!isset($_COOKIE["user"]) && (!isset($_POST["user"]) && !isset($_POST["password"]))) : ?>
                 <div class="dropdown">
                     <a class="btn btn-dark border-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Regístrate
@@ -52,15 +51,14 @@ if (isset($_POST["logout"])) {
             <?php else : ?>
                 <?php
                 if (!isset($_POST["user"]) && !isset($_POST["password"])) {
-                    $user = $_SESSION["user"];
-                    $password = $_SESSION["password"];
+                    $user = $_COOKIE["user"];
+                    $password = $_COOKIE["password"];
                 } else {
                     $user = $_POST["user"];
                     $password = $_POST["password"];
                 }
 
-                // $conn = new mysqli("localhost", "root", "", "series");
-                $conn = new mysqli("sql207.epizy.com", "epiz_27293444", "GTAZ4ep1Zy", "epiz_27293444_janime");
+                $conn = new mysqli("localhost", "root", "", "series");
 
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
@@ -81,8 +79,8 @@ if (isset($_POST["logout"])) {
                     $sql = "SELECT name_Serie, watched FROM users_watch_series WHERE username_User='$user'";
                     $result = $conn->query($sql);
 
-                    $_SESSION["user"] = $user;
-                    $_SESSION["password"] = $password;
+                    setcookie("user", $user);
+                    setcookie("password", $password);
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
