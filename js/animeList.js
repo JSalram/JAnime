@@ -7,8 +7,8 @@ function getAnime(anime) {
 
     switch (anime) {
         case "OnePiece":
-            for (let i = 1; i <= 950; i++) {
-                serie.chapters.push(`https://www3.animeflv.net/ver/one-piece-tv-${i}`);
+            for (let i = 1; i <= 960; i++) {
+                serie.chapters.push(`https://onepiecemovil.com/ver/${i}/`);
             }
             break;
         case "Haikyuu":
