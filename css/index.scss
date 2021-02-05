@@ -5,8 +5,8 @@ nav {
     }
     @media (max-width: 375px) {
         .navbar-header,
+        .navbar-brand,
         .dropdown,
-        .user,
         form {
             display: block;
             margin: auto;
@@ -16,4 +16,8 @@ nav {
 
 hr {
     height: 5px;
+}
+
+.card-title img {
+    height: 60px;
 }

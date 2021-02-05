@@ -1,5 +1,7 @@
 # [JAnime](http://janime.epizy.com)
 
+### ***En desarrollo***
+
 Janime es una aplicación de uso personal que utilizo para llevar el recuento de los capítulos de mis series
 favoritas de la manera más cómoda posible, escogiendo además la fuente de los vídeos para conseguir así la
 mejor calidad posible.

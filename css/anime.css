@@ -1,3 +1,7 @@
+img {
+  width: 8em;
+}
+
 li {
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
@@ -8,25 +12,25 @@ li:hover {
           filter: opacity(0.8);
 }
 
-.watch {
+li .watch {
   background-image: url(../img/eye.svg);
 }
 
-.watched {
+li .watched {
   background-image: url(../img/invisible.svg);
   margin-top: 2px;
 }
 
-img {
-  width: 8em;
-}
-
-.watch,
-.watched {
+li .watch,
+li .watched {
   cursor: pointer;
   width: 30px;
   background-repeat: no-repeat;
   background-position-y: center;
+}
+
+iframe {
+  height: 65vh;
 }
 
 .goTop {
@@ -77,4 +81,4 @@ img {
     left: 100%;
   }
 }
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=anime.css.map */

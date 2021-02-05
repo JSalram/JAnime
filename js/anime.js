@@ -66,35 +66,30 @@ function print() {
     }
 }
 
-function watch(url) {
+async function watch(url) {
+    let episode;
     if (!embed) {
-        let html = new XMLHttpRequest();
-        html.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                modal.innerHTML = `<iframe 
-                width="100%" 
-                height="315" 
-                src=${this.responseText} 
-                frameborder="0" 
-                allowfullscreen
-                ></iframe>`;
-            }
-        };
-        html.open("GET", `../php/scraping.php?url=${url}&embed=1`, true);
-        html.send();
+        let html = await fetch(`../../php/scraping.php?url=${url}`);
+        episode = await html.text();
     } else {
-        modal.innerHTML = `<iframe 
-        width="100%" 
-        height="315" 
-        src=${url} 
-        frameborder="0" 
-        allowfullscreen
-        ></iframe>`;
+        episode = url;
     }
+
+    modal.innerHTML = `<iframe
+    width="100%"
+    src=${episode}
+    frameborder="0"
+    allowfullscreen
+    ></iframe>`;
 }
+
+print();
 
 // ====================================================== //
 
+async function sendWatched() {
+    await fetch(`../../php/watched.php?anime=${anime}&user=${user}&w=${w}`);
+}
 function toggleWatch(i, element) {
     if (element.classList.contains("watch")) {
         element.classList.toggle("watched");
@@ -124,31 +119,23 @@ function setWatched(i, li, a, div) {
         div.classList.add("watch");
     }
 }
-function sendWatched() {
-    let xhttp = new XMLHttpRequest();
-    xhttp.open("GET", `../php/watched.php?anime=${anime}&user=${user}&w=${w}`, true);
-    xhttp.send();
-}
 
 closeModal.addEventListener("click", () => {
     modal.innerHTML = "";
 });
-print();
 
 // ====================================================== //
 
-let goTop = document.querySelector("div.goTop");
+const goTop = document.querySelector("div.goTop");
 
-var scrollTop = function () {
+window.addEventListener("scroll", () => {
     var y = window.scrollY;
     if (y >= 500) {
         goTop.className = "goTop show";
     } else {
         goTop.className = "goTop hide";
     }
-};
-
-window.addEventListener("scroll", scrollTop);
+});
 
 goTop.addEventListener("click", () => {
     document.body.scrollTop = 0;

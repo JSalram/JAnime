@@ -1,28 +1,32 @@
+img {
+    width: 8em;
+}
+
 li {
     transition: all 0.2s linear;
     &:hover {
         filter: opacity(0.8);
     }
+
+    .watch {
+        background-image: url(../img/eye.svg);
+    }
+    .watched {
+        background-image: url(../img/invisible.svg);
+        margin-top: 2px;
+    }
+
+    .watch,
+    .watched {
+        cursor: pointer;
+        width: 30px;
+        background-repeat: no-repeat;
+        background-position-y: center;
+    }
 }
 
-.watch {
-    background-image: url(../img/eye.svg);
-}
-.watched {
-    background-image: url(../img/invisible.svg);
-    margin-top: 2px;
-}
-
-img {
-    width: 8em;
-}
-
-.watch,
-.watched {
-    cursor: pointer;
-    width: 30px;
-    background-repeat: no-repeat;
-    background-position-y: center;
+iframe {
+    height: 65vh;
 }
 
 // GO TOP

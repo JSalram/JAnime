@@ -4,6 +4,7 @@ nav #dropdownMenuLink {
 
 @media (max-width: 375px) {
   nav .navbar-header,
+  nav .navbar-brand,
   nav .dropdown,
   nav .user,
   nav form {
@@ -14,5 +15,9 @@ nav #dropdownMenuLink {
 
 hr {
   height: 5px;
+}
+
+.card-title img {
+  height: 60px;
 }
 /*# sourceMappingURL=index.css.map */
