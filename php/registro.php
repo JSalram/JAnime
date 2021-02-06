@@ -30,7 +30,11 @@
     </nav>
 
     <!-- MENSAJE -->
-        <p class="bg-warning p-2 font-weight-bold text-center">SERVICIO DE REGISTRO TEMPORALMENTE INACTIVO POR RAZONES DE SEGURIDAD</p>
+    <p class="bg-warning p-2 font-weight-bold text-center">
+        SERVICIO DE REGISTRO EN CONSTRUCCIÓN POR MOTIVOS DE SEGURIDAD
+        <br>
+        Usuario de pruebas ➜ Usuario: test - Contraseña: test
+    </p>
 
     <!-- FORMULARIO -->
     <div class="container my-4">
@@ -39,15 +43,15 @@
                 <h3 class="text-center mb-4">Registro</h3>
                 <div class="form-group">
                     <label for="user">Nombre de usuario</label>
-                    <input type="text" name="user" id="user" class="form-control">
+                    <input type="text" name="user" id="user" class="form-control" disabled>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="text" name="password" id="password" class="form-control">
+                    <input type="text" name="password" id="password" class="form-control" disabled>
                 </div>
                 <div class="form-group">
                     <label for="password2">Repetir contraseña</label>
-                    <input type="text" name="password2" id="password2" class="form-control">
+                    <input type="text" name="password2" id="password2" class="form-control" disabled>
                 </div>
                 <div class="form-group">
                     <input name="submit" id="submit" class="btn btn-info w-100" type="button" value="Enviar">
