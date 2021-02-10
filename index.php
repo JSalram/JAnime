@@ -6,6 +6,8 @@ if (isset($_POST["logout"])) {
     $_SESSION["logout"] = true;
     echo '<script>localStorage.clear()</script>';
 }
+
+$animes = ["One Piece", "Haikyuu", "Code Geass", "Hunter x Hunter"];
 ?>
 
 <html lang="es">
@@ -23,7 +25,7 @@ if (isset($_POST["logout"])) {
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <!-- OWN -->
     <link rel="stylesheet" href="css/index.css" />
-    <link rel="shortcut icon" href="./img/mugiwara.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./img/onepiece.png" type="image/x-icon" />
     <script src="./js/index.js" defer></script>
     <title>JAnime</title>
 </head>
@@ -45,45 +47,34 @@ if (isset($_POST["logout"])) {
     <!-- SERIES -->
     <div class="container" id="series">
         <div class="row justify-content-center">
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <img class="mx-3" src="img/mugiwara.png" />
-                            One Piece
-                        </h4>
-                        <hr />
-                        <img class="img-fluid mb-3" src="img/mugiwara-card.jpg" />
-                        <a class="btn btn-lg btn-primary d-block" href="./animes/OnePiece/index.html">Ver ahora</a>
+            <?php
+            foreach ($animes as $anime) {
+                $path = str_replace(" ", "", $anime);
+                $img = strtolower($path);
+
+                echo '
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <img class="mx-3" src="img/' . $img . '.png" />
+                                ' . $anime . '
+                            </h4>
+                            <hr />
+                            <div 
+                            id="imgCard" 
+                            style="background-image: url(img/' . $img . '-card.jpg)"
+                            ></div>
+                            <a 
+                            class="btn btn-lg mt-3 btn-primary d-block" 
+                            href="./animes/' . $path . '/index.html"
+                            >Ver ahora</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <img class="mx-3" src="img/haikyuu.png" />
-                            Haikyuu
-                        </h4>
-                        <hr />
-                        <img class="img-fluid mb-3" src="img/haikyuu-card.png" />
-                        <a class="btn btn-lg btn-primary d-block" href="./animes/Haikyuu/index.html">Ver ahora</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <img class="mx-3" src="img/codegeass.png" />
-                            Code Geass
-                        </h4>
-                        <hr />
-                        <img class="img-fluid mb-3" src="img/codegeass-card.jpg" />
-                        <a class="btn btn-lg btn-primary d-block" href="./animes/CodeGeass/index.html">Ver ahora</a>
-                    </div>
-                </div>
-            </div>
+                ';
+            }
+            ?>
         </div>
     </div>
 </body>

@@ -60,6 +60,11 @@ function getAnime(anime) {
                 serie.chapters.push(`https://mega.nz/embed/${url}/`);
             });
             break;
+        case "HunterxHunter":
+            for (let i = 1; i <= 148; i++) {
+                serie.chapters.push(`https://ytanime.tv/ver/hunter-x-hunter-2011-${i}`);
+            }
+            break;
     }
     return serie;
 }

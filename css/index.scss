@@ -18,6 +18,15 @@ hr {
     height: 5px;
 }
 
-.card-title img {
-    height: 60px;
+.card {
+    .card-title img {
+        height: 60px;
+    }
+    #imgCard {
+        min-height: 40vh;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 3px;
+    }
 }

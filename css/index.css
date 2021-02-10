@@ -6,7 +6,6 @@ nav #dropdownMenuLink {
   nav .navbar-header,
   nav .navbar-brand,
   nav .dropdown,
-  nav .user,
   nav form {
     display: block;
     margin: auto;
@@ -17,7 +16,15 @@ hr {
   height: 5px;
 }
 
-.card-title img {
+.card .card-title img {
   height: 60px;
+}
+
+.card #imgCard {
+  min-height: 40vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 3px;
 }
 /*# sourceMappingURL=index.css.map */
