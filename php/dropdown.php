@@ -23,14 +23,14 @@ if (!isset($_COOKIE["user"])) {
                     <input id="password" class="form-control" type="password" name="password" />
                 </div>
                 <button class="btn btn-dark w-100" type="submit">Enviar</button>
-                <a href="./php/registro.php" class="btn btn-link text-light w-100 mt-2">Registrarse</a>
+                <a href="./php/signup.php?v=1" class="btn btn-link text-light w-100 mt-2">Registrarse</a>
             </form>
         </div>
     ';
 } else {
     $user = $_COOKIE["user"];
 
-    $conn = new mysqli("localhost", "root", "", "series");
+    // $conn = new mysqli("localhost", "root", "", "series");
 
     $sql = "SELECT name_Serie, watched FROM users_watch_series WHERE username_User='$user'";
     $result = $conn->query($sql);
@@ -41,11 +41,17 @@ if (!isset($_COOKIE["user"])) {
         }
     }
     $conn->close();
+
     echo '
         <a class="btn btn-light border-secondary dropdown-toggle font-weight-bold user" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             ' . ucfirst($user) . '
         </a>
-        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuLink">';
+
+    if ($user == "salram") {
+        echo '<a href="./php/admUsers.php" class="dropdown-item">Administrar</a>';
+    }
+    echo '
             <form action="./index.php" method="POST">
                 <input type="hidden" name="logout">
                 <button class="dropdown-item text-danger" type="submit" >Cerrar sesión</button>

@@ -4,7 +4,7 @@ $anime = $_GET["anime"];
 $user = $_GET["user"];
 $w = $_GET["w"];
 
-$conn = new mysqli("localhost", "root", "", "series");
+// $conn = new mysqli("localhost", "root", "", "series");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

@@ -2,7 +2,7 @@ function getAnime(anime) {
     let serie = {
         chapters: [],
         seasons: [0],
-        embed: false
+        embed: false,
     };
 
     switch (anime) {
@@ -14,7 +14,7 @@ function getAnime(anime) {
         case "Haikyuu":
             let temp = 1;
             serie.seasons.push(26, 51, 61);
-                
+
             for (let i = 1; i < 87; i++) {
                 if (i <= 26) {
                     serie.chapters.push(`https://www3.animeflv.net/ver/haikyuu-${i}`);
@@ -63,6 +63,43 @@ function getAnime(anime) {
         case "HunterxHunter":
             for (let i = 1; i <= 148; i++) {
                 serie.chapters.push(`https://ytanime.tv/ver/hunter-x-hunter-2011-${i}`);
+            }
+            break;
+        case "Naruto":
+            serie.seasons.push(220);
+            for (let i = 1; i <= 720; i++) {
+                if (i <= 220) {
+                    serie.chapters.push(`https://www3.animeflv.net/ver/naruto-${i}`);
+                } else {
+                    serie.chapters.push(`https://www3.animeflv.net/ver/naruto-shippuden-hd-${i - serie.seasons[1]}`);
+                }
+            }
+            break;
+        case "Bleach":
+            for (let i = 1; i <= 366; i++) {
+                serie.chapters.push(`https://www3.animeflv.net/ver/bleach-tv-${i}`);
+            }
+            break;
+        case "MahoukaKoukou":
+            serie.seasons.push(26);
+            for (let i = 1; i <= 39; i++) {
+                if (i <= 26) {
+                    serie.chapters.push(`https://www3.animeflv.net/ver/mahouka-koukou-no-rettousei-${i}`);
+                } else {
+                    serie.chapters.push(
+                        `https://www3.animeflv.net/ver/mahouka-koukou-no-rettousei-raihoushahen-${i - serie.seasons[1]}`
+                    );
+                }
+            }
+            break;
+        case "KiminiTodoke":
+            serie.seasons.push(25);
+            for (let i = 1; i <= 37; i++) {
+                if (i <= 25) {
+                    serie.chapters.push(`https://www3.animeflv.net/ver/kimi-ni-todoke-${i}`);
+                } else {
+                    serie.chapters.push(`https://www3.animeflv.net/ver/kimi-ni-todoke-2-${i-serie.seasons[1]}`);
+                }
             }
             break;
     }

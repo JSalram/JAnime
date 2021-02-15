@@ -7,7 +7,7 @@ if (isset($_POST["logout"])) {
     echo '<script>localStorage.clear()</script>';
 }
 
-$animes = ["One Piece", "Haikyuu", "Code Geass", "Hunter x Hunter"];
+$animes = ["One Piece", "Haikyuu", "Code Geass", "Hunter x Hunter", "Naruto", "Bleach", "Mahouka Koukou", "Kimi ni Todoke"];
 ?>
 
 <html lang="es">
@@ -15,10 +15,6 @@ $animes = ["One Piece", "Haikyuu", "Code Geass", "Hunter x Hunter"];
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- CACHE -->
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="pragma" content="no-cache" />
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
     <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -57,13 +53,13 @@ $animes = ["One Piece", "Haikyuu", "Code Geass", "Hunter x Hunter"];
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">
-                                <img class="mx-3" src="img/' . $img . '.png" />
+                                <img class="mx-3" src="img/' . $img . '.png?v=1.0" />
                                 ' . $anime . '
                             </h4>
                             <hr />
                             <div 
                             id="imgCard" 
-                            style="background-image: url(img/' . $img . '-card.jpg)"
+                            style="background-image: url(img/' . $img . '-card.jpg?v=1.0)"
                             ></div>
                             <a 
                             class="btn btn-lg mt-3 btn-primary d-block" 
